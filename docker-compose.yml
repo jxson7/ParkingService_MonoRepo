@@ -1,0 +1,9 @@
+services:
+  authentication:
+    build: ./auth-service
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_URL=mongodb+srv://authservice:uB16msEdK3v6tvC7@authservicedatabase.pjqxc4j.mongodb.net/?retryWrites=true&w=majority
+      - PORT=3000
+      - JWT_SECRET=pZnf1tK5NNWfgv6NlWpHVCk/+pFQxIzIdKec8JTn+GA=
