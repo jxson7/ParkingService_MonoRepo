@@ -7,3 +7,13 @@ services:
       - DB_URL=mongodb+srv://authservice:uB16msEdK3v6tvC7@authservicedatabase.pjqxc4j.mongodb.net/?retryWrites=true&w=majority
       - PORT=3000
       - JWT_SECRET=pZnf1tK5NNWfgv6NlWpHVCk/+pFQxIzIdKec8JTn+GA=
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "25565:25565"
+    environment:
+      - REACT_APP_AUTH_SERVICE_ENDPOINT=http://localhost:3000
+      - PORT=25565
+
+  
