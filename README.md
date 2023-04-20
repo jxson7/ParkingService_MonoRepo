@@ -11,8 +11,10 @@ Run the following command to clone the submodules
 
 Use the following command to use the dockerised repos.
 
-`docker compose up`
+`docker compose build; docker compose up`
 
 # Sub-Repositories
 
-Auth service
+Auth Service
+Frontend
+Notification Service
