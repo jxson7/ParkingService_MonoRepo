@@ -1,4 +1,12 @@
 services:
+
+  notifications:
+    build: ./notification-service
+    ports:
+      - "3001:3001"
+    environment:
+      - JWT_SECRET=pZnf1tK5NNWfgv6NlWpHVCk/+pFQxIzIdKec8JTn+GA=
+      - PORT=3001
   authentication:
     build: ./auth-service
     ports:
@@ -15,5 +23,3 @@ services:
     environment:
       - REACT_APP_AUTH_SERVICE_ENDPOINT=http://localhost:3000
       - PORT=25565
-
-  
