@@ -7,3 +7,4 @@
 [submodule "notification-service"]
 	path = notification-service
 	url = https://gitlab.surrey.ac.uk/group-5/notification-service.git
+	branch=main
