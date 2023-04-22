@@ -1,5 +1,14 @@
 services:
 
+  locations:
+    build: ./location_microservice
+    ports:
+      - "3002:3002"
+    environment:
+      - JWT_SECRET=pZnf1tK5NNWfgv6NlWpHVCk/+pFQxIzIdKec8JTn+GA=
+      - PORT=3002
+      - DB_URL=mongodb+srv://user:WsfePqVVojP4lgZk@locationservice.dqljyov.mongodb.net/ParkingLocations?retryWrites=true&w=majority
+
   notifications:
     build: ./notification-service
     ports:
@@ -23,6 +32,7 @@ services:
     environment:
       - REACT_APP_NOTIFICATION_SERVICE_ENDPOINT=http://localhost:3001
       - REACT_APP_AUTH_SERVICE_ENDPOINT=http://localhost:3000
+      - REACT_APP_LOCATION_SERVICE_ENDPOINT=http://localhost:3002
       - PORT=25565
 
     depends_on:
