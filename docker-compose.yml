@@ -1,5 +1,4 @@
 services:
-
   locations:
     build: ./location_microservice
     ports:
@@ -8,6 +7,7 @@ services:
       - JWT_SECRET=pZnf1tK5NNWfgv6NlWpHVCk/+pFQxIzIdKec8JTn+GA=
       - PORT=3002
       - DB_URL=mongodb+srv://user:WsfePqVVojP4lgZk@locationservice.dqljyov.mongodb.net/ParkingLocations?retryWrites=true&w=majority
+      - ADMIN_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjA5Nj
 
   notifications:
     build: ./notification-service
@@ -24,17 +24,34 @@ services:
       - DB_URL=mongodb+srv://authservice:uB16msEdK3v6tvC7@authservicedatabase.pjqxc4j.mongodb.net/?retryWrites=true&w=majority
       - PORT=3000
       - JWT_SECRET=pZnf1tK5NNWfgv6NlWpHVCk/+pFQxIzIdKec8JTn+GA=
+  bookings:
+    build: ./bookings_service
+    ports:
+      - "3003:3003"
+    environment:
+      - NOTIFICATION_SERVICE_ENDPOINT=http://notifications:3001
+      - LOCATION_SERVICE_ENDPOINT=http://locations:3002
+      - JWT_SECRET=pZnf1tK5NNWfgv6NlWpHVCk/+pFQxIzIdKec8JTn+GA=
+      - ADMIN_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjA5Nj
+      - PORT=3003
+    depends_on:
+      - notifications
+      - locations
 
   frontend:
     build: ./frontend
     ports:
       - "25565:25565"
     environment:
-      - REACT_APP_NOTIFICATION_SERVICE_ENDPOINT=http://localhost:3001
       - REACT_APP_AUTH_SERVICE_ENDPOINT=http://localhost:3000
+      - REACT_APP_NOTIFICATION_SERVICE_ENDPOINT=http://localhost:3001
       - REACT_APP_LOCATION_SERVICE_ENDPOINT=http://localhost:3002
+      - REACT_APP_BOOKING_SERVICE_ENDPOINT=http://localhost:3003
       - PORT=25565
 
     depends_on:
       - authentication
       - notifications
+      - bookings
+      - locations
+

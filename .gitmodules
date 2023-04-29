@@ -11,3 +11,6 @@
 [submodule "location_microservice"]
 	path = location_microservice
 	url = https://gitlab.surrey.ac.uk/group-5/location_microservice.git
+[submodule "bookings_service"]
+	path = bookings_service
+	url = https://gitlab.surrey.ac.uk/group-5/bookings_service.git
