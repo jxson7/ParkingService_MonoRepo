@@ -6,7 +6,7 @@ default:
 build:
   stage: build
   script:
-    - gcloud build submit --tag grc.io/parkpal-384815
+    - gcloud builds submit --tag grc.io/parkpal-384815
 
 deploy:
   stage: deploy
