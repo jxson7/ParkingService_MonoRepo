@@ -1,0 +1,14 @@
+default:
+  image: google/cloud-sdk:alpine
+  before_script:
+    - gcloud config set project parkpal-384815
+  
+build:
+  stage: build
+  script:
+    - gcloud build submit --tag grc.io/parkpal-384815
+
+deploy:
+  stage: deploy
+  script:
+    - gcloud run deploy monorepo --image grc.io/parkpal-384815/monorepo --platform managed --region europe-west1-b --allow-unauthenticated
